@@ -1,10 +1,10 @@
 import React from 'react'
+import Homepage from "./Components/Homepage";
 
 const App = () => {
     return (
         <div className="app">
-            <h1>This is an app</h1>
-
+        <Homepage/>
         </div>
     )
 }
