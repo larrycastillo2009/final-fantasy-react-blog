@@ -14,7 +14,7 @@ const Homepage = () => {
                     We provide high quality online resource for reading blogs. Just sign
                     up and start reading some quality blogs.
                 </p>
-                <GoogleLogin clientId=""
+                <GoogleLogin clientId="1078992692605-mkdofu9cchbfre2i30qputakbga896d9.apps.googleusercontent.com"
                 render={(renderProps) =>(
                     <button
                         onClick={renderProps.onClick}
