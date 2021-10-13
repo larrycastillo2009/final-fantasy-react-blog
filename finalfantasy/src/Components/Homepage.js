@@ -1,13 +1,17 @@
 import React from 'react';
 import GoogleLogin from "react-google-login";
-import {selectSignedIn} from "../features/userSlice";
+import {selectSignedIn, setSignedIn,setUserData} from "../features/userSlice";
 
 import "../styling/home.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const Homepage = () => {
+
+    const dispatch = useDispatch()
     const login = (response) => {
         console.log(response);
+        dispatch(setSignedIn(true));
+        dispatch(setUserData(response.profileObj));
     }
 
     const isSignedIn = useSelector(selectSignedIn)
