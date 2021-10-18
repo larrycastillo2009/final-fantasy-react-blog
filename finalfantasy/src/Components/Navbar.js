@@ -1,7 +1,7 @@
 import {Avatar} from "@material-ui/core";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectSignedIn, selectUserData, setSignedIn, setUserData} from "../features/userSlice";
+import {selectSignedIn, selectUserData, setSignedIn, setUserData, setInput} from "../features/userSlice";
 import {GoogleLogout} from "react-google-login";
 import "../styling/navbar.css"
 
@@ -17,6 +17,11 @@ const Navbar = () => {
         dispatch(setUserData(null))
     }
 
+    const handleClick = (e) =>{
+        e.preventDefault()
+        dispatch(setInput(inputValue))
+    };
+
     return (
         <div className="navbar">
             <h1 className="navbar__header">Final Fantasy React </h1>
@@ -28,7 +33,7 @@ const Navbar = () => {
                            onChange={(e) => setInputValue(e.target.value)}
                     />
                     {/*onClick={handleClick} goes after classname*/}
-                    <button className="submit">Search</button>
+                    <button className="submit" onClick={handleClick}>Search</button>
                 </div>
             )}
 
