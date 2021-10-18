@@ -1,18 +1,20 @@
 import {Avatar} from "@material-ui/core";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectSignedIn, selectUserData} from "../features/userSlice";
+import {selectSignedIn, selectUserData, setSignedIn, setUserData} from "../features/userSlice";
 import {GoogleLogout} from "react-google-login";
+import "../styling/navbar.css"
 
 const Navbar = () => {
-    const [inputValue,setInputValue] = useState("tech")
+    const [inputValue, setInputValue] = useState("tech")
     const isSignedIn = useSelector(selectSignedIn);
     const userData = useSelector(selectUserData)
 
     const dispatch = useDispatch()
 
-    const logout = (response) =>  {
-        dispatch(selectUserData(null))
+    const logout = (response) => {
+        dispatch(setSignedIn(false))
+        dispatch(setUserData(null))
     }
 
     return (
@@ -20,18 +22,18 @@ const Navbar = () => {
             <h1 className="navbar__header">Final Fantasy React </h1>
             {isSignedIn && (
                 <div className="blog__search">
-                <input className="search"
-                                                               placeholder="Search for a blog"
-                                                               value={inputValue}
-                                                               onChange={(e) => setInputValue(e.target.value)}
-            />
-            {/*onClick={handleClick} goes after classname*/}
-            <button className="submit" >Search</button>
-            </div>
+                    <input className="search"
+                           placeholder="Search for a blog"
+                           value={inputValue}
+                           onChange={(e) => setInputValue(e.target.value)}
+                    />
+                    {/*onClick={handleClick} goes after classname*/}
+                    <button className="submit">Search</button>
+                </div>
             )}
 
             {isSignedIn ? <div className="navbar__user__data">
-                <Avatar src={userData?.imageURL} alt={userData?.name}/>
+                <Avatar className="user" src={userData?.imageURL} alt={userData?.name}/>
                 <h1 className="signedIn">{userData?.givenName}</h1>
                 <GoogleLogout clientId="1078992692605-mkdofu9cchbfre2i30qputakbga896d9.apps.googleusercontent.com"
                               render={(renderProps) => (
@@ -40,16 +42,14 @@ const Navbar = () => {
                                       onClick={renderProps.onClick}
                                       disabled={renderProps.disabled}
                                       className="logout__button"
-                                      >
+                                  >
                                       Logout
                                   </button>
                               )}
                               buttonText="Logout"
                               onLogoutSuccess={logout}
                 />
-            </div> :(
-                ""
-            )}
+            </div> : <h1 className="notSignedIn">User is not available</h1>}
         </div>
     )
 }
