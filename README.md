@@ -1,1 +1,2 @@
-# final-fantasy-react-blog
+# react-news-blog
+
